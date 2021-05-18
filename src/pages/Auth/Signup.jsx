@@ -8,7 +8,6 @@ const Signup = ({ setAppUser }) => {
     const authHandler = ({ username, password }) => {
         service.signup(username, password)
         .then((response) => {
-            console.log(response);
             setAppUser(response);
         })
         .catch((err) => console.error(err));

@@ -14,7 +14,6 @@ const Navbar = ({ loggedInUser, setAppUser }) => {
     const logoutUser = () => {
         service.logout()
         .then((response) => {
-            console.log(response);
             setAppUser(null);
         })
         .catch((err) => console.error(err));

@@ -8,7 +8,6 @@ const Login = ({ setAppUser }) => {
     const authHandler = ({ username, password }) => {
         service.login(username, password)
         .then((response) => {
-            console.log(response);
             setAppUser(response);
         })
         .catch((err) => console.error(err));

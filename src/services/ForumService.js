@@ -11,18 +11,32 @@ class ForumService {
     }
 
     getForum = () => this.service
-    .get('/api/forum')
+    .get('/forum')
     .then((response) => response.data)
     .catch((err) => console.error(err));
 
     getThread = (id) => this.service
-    .get(`/api/thread/${id}`)
+    .get(`/thread/${id}`)
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
+
+    createThread = (data) => this.service
+    .post('/thread', data)
     .then((response) => response.data)
     .catch((err) => console.error(err));
 
     getPost = (id) => this.service
-    .get(`/api/post/${id}`)
+    .get(`/post/${id}`)
     .then((response) => response.data)
+    .catch((err) => console.error(err));
+
+    createPost = (threadId, post) => this.service
+    .post(`/post`, post)
+    .then((response) => {
+        this.service.put(`thread/${threadId}`, { postId: response.data._id })
+        .then((response) => response.data)
+        .catch((err) => console.error(err));
+    })
     .catch((err) => console.error(err));
 }
 

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const AddForumPost = ({ addPost }) => {
     const initialState = {
         content: '',
-        images: [],
     };
 
     const [post, setPost] = useState(initialState);
@@ -21,8 +20,8 @@ const AddForumPost = ({ addPost }) => {
 
     return (
         <form onChange={changeHandler}>
-            <input type="file" id="myfile" name="myfile" />
-            <textarea name="content" id="" cols="30" rows="10"></textarea>        
+            {/* <input type="file" id="myfile" name="myfile" /> */}
+            <textarea name="content" value={post.content} cols="30" rows="10"></textarea>        
             <button onClick={submitHandler}>Reply</button>
         </form>
     )
