@@ -12,9 +12,18 @@ class ForumService {
 
     getForum = () => this.service
     .get('/api/forum')
-    .then()
-    .catch()
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
 
+    getThread = (id) => this.service
+    .get(`/api/thread/${id}`)
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
+
+    getPost = (id) => this.service
+    .get(`/api/post/${id}`)
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
 }
 
 export default ForumService;

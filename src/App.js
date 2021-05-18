@@ -9,6 +9,8 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Signup from './pages/Auth/Signup';
 import Login from './pages/Auth/Login';
+import Forum from './pages/Forum/Forum';
+import ForumThread from './pages/Forum/ForumThread';
 
 
 function App() {
@@ -39,11 +41,13 @@ function App() {
       <Navbar setAppUser={setUser} loggedInUser={loggedInUser} />
       <Switch>
         <Route path="/signup">
-          {loggedInUser ? <Redirect to='/' /> : <Signup setAppUser={setUser} loggedInUser={loggedInUser}/>}
+          {loggedInUser ? <Redirect to='/' /> : <Signup setAppUser={setUser} />}
         </Route>
         <Route path="/login">
-          {loggedInUser ? <Redirect to='/' /> : <Login setAppUser={setUser} loggedInUser={loggedInUser}/>}
+          {loggedInUser ? <Redirect to='/' /> : <Login setAppUser={setUser} />}
         </Route>
+        <Route path='/forum' render={() => <Forum loggedInUser={loggedInUser} />} />
+        <Route path='/thread/' render={() => <ForumThread loggedInUser={loggedInUser} />} />
         <Route path='/' render={() => <Home loggedInUser={loggedInUser} />} />
       </Switch>
     </div>
