@@ -16,6 +16,21 @@ const UserProfile = ({ match, loggedInUser }) => {
 
     useEffect(() => fetchUser(match.params.id), [match.params.id])
 
+    const handleFileUpload = (event) => {
+        const forumService = new ForumService();
+
+        const uploadData = new FormData();
+        uploadData.append('imagefile', event.target.files[0]);
+
+        forumService.uploadImg(uploadData)
+        .then((response => {
+            forumService.changeAvatar(profileUser._id, response.secure_url)
+            .then(response => response.data)
+            .catch((err) => console.error(err));
+        }))
+        .catch((err) => console.error(err));
+    }
+
     return(
         profileUser &&
         <article className="media">
@@ -28,7 +43,9 @@ const UserProfile = ({ match, loggedInUser }) => {
                 {
                     loggedInUser &&
                     profileUser._id === loggedInUser._id &&
-                    <p>Change profile picture</p>   
+                    <form>
+                        <input type="file" onChange={handleFileUpload}/>
+                    </form>
                 }
             </div>
             <div className='media-right'>

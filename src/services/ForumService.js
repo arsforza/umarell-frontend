@@ -44,6 +44,16 @@ class ForumService {
     .get(`/user/${id}`)
     .then((response) => response.data)
     .catch((err) => console.error(err));
+
+    uploadImg = (file) => this.service
+    .post('/uploadimg', file)
+    .then((response => response.data))
+    .catch((err) => console.error(err));
+
+    changeAvatar = (userId, imgUrl) => this.service
+    .put('/changeavatar', {userId, imgUrl})
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
 }
 
 export default ForumService;
