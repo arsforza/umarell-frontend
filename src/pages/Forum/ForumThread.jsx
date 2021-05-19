@@ -35,24 +35,26 @@ const ForumThread = (props) => {
     }
 
     return(
-        <div>
+        <div className='container'>
             {
                 thread._id &&
-                <div>
-                    <div>
-                        <h2>{thread.title}</h2>
-                        {'Created by ' + thread.user.username + ' on ' + thread.createdAt}
+                <section className='section'>
+                    <div className='column'>
+                        <h1 className='title'>{thread.title}</h1>
+                        <p>{'Created by ' + thread.user.username + ' on ' + thread.createdAt}</p>
                     </div>
-                    <div>
+                    <div className='container'>
                         {
                             thread.posts.map(post => <ForumPost key={post._id} post={post} />)
                         }
                     </div>
-                </div>
+                </section>
             }
             {
                 loggedInUser &&
-                <div><AddForumPost addPost={addPost}/></div>
+                <section className='section'>
+                    <AddForumPost addPost={addPost}/>
+                </section>
             }
         </div>
     );

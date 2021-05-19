@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import './Map.css';
 
 
 const Map = ({ threadList, loggedInUser, addNewThread }) => {
@@ -12,7 +13,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
         zoom: 10,
     });
     const [mapClickCoord, setMapClickCoord] = useState(null);
-    const [showCreateNewThread, setCreateNewThread] = useState(false);
+    const [showCreateNewThread, setShowCreateNewThread] = useState(false);
     const [newThreadTitle, setNewThreadTitle] = useState('');
     
     const [clickedThread, setClickedThread] = useState(null);
@@ -26,10 +27,13 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
             longitude: longitude,
             latitude: latitude,
         });
-        setCreateNewThread(true);
+        setShowThreadPopup(false);
+        setClickedThread(null);
+        setShowCreateNewThread(true);
     }
 
     const threadPopup = (thread) => {
+        setShowCreateNewThread(false);
         setClickedThread(thread);
         setShowThreadPopup(true);
     }
@@ -45,7 +49,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
             lat: mapClickCoord.latitude,
             lon: mapClickCoord.longitude,
         });
-        setCreateNewThread(false);
+        setShowCreateNewThread(false);
     }
 
     return (
@@ -64,7 +68,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
                         longitude={thread.lon}
                         onClick={() => threadPopup(thread)}
                     >
-                        <span className='material-icons'>place</span>
+                        <span className='material-icons map-marker'>place</span>
                     </Marker>
                 )
             })
@@ -78,14 +82,16 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
                 longitude={mapClickCoord.longitude}
                 closeButton={true}
                 closeOnClick={false}
-                onClose={() => showCreateNewThread(false)}
+                onClose={() => setShowCreateNewThread(false)}
             >
                 <form>
-                        <label>
+                    <div className="field">
+                        <label className='label'>
                             Thread title
-                            <input type='text' name='title' onChange={(e) => threadTitleHandler(e)} />
                         </label>
-                        <button onClick={(e) => submitHandler(e)}>Create new thread</button>
+                        <input className='input' type='text' name='title' onChange={(e) => threadTitleHandler(e)} />
+                    </div>
+                    <button className='button is-primary' onClick={(e) => submitHandler(e)}>Create new thread</button>
                 </form>
             </Popup>
         }
@@ -99,10 +105,15 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
                 closeOnClick={false}
                 onClose={() => setShowThreadPopup(false)}
                 offsetLeft={11}
-            >
-                <Link to={'/thread/' + clickedThread._id}>
-                    {clickedThread.title}
-                </Link>
+            >   
+                <div className="container">
+                    <h4 className="subtitle">
+                        {clickedThread.title}
+                    </h4>
+                    <Link className='is-link is-primary' to={'/thread/' + clickedThread._id}>
+                        <span className='button is-primary'>Open thread</span>
+                    </Link>
+                </div>
             </Popup>
         }
 

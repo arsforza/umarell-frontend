@@ -20,18 +20,34 @@ const Navbar = ({ loggedInUser, setAppUser }) => {
     };
 
     return(
-        <nav>
-            <Link to='/'>Home</Link>
-            {
-                !user
-                ? <span>
-                    <Link to='/signup'>Signup</Link>
-                    <Link to='/login'>Login</Link>
-                </span>
-                : <Link to="/">
-                    <button onClick={() => logoutUser()}>Logout</button>
-                  </Link>
-            }
+        <nav className='navbar'>
+            <div className="container">
+                <div className="navbar-brand">
+                    <Link to='/'>Home</Link>
+                    <div className="navbar-burger burger" data-target='app-menu'>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div className="navbar-menu" id='app-menu'>
+                    <div className="navbar-end">
+                        {
+                            !user
+                            ? <div>
+                                <Link to='/signup'>Signup</Link>
+                                <Link to='/login'>Login</Link>
+                            </div>
+                            : <Link to='/'>
+                                <button className='button is-primary' onClick={() => logoutUser()}>Logout</button>
+                            </Link>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            
+            
             
         </nav>
     );

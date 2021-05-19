@@ -21,8 +21,12 @@ const AddForumPost = ({ addPost }) => {
     return (
         <form onChange={changeHandler}>
             {/* <input type="file" id="myfile" name="myfile" /> */}
-            <textarea name="content" value={post.content} cols="30" rows="10"></textarea>        
-            <button onClick={submitHandler}>Reply</button>
+            <div className="field">
+                <div className="control">
+                    <textarea class='textarea' name="content" value={post.content} cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <button className='button is-link' onClick={submitHandler}>Reply</button>
         </form>
     )
 }
