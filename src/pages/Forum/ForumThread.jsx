@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ForumPost from '../../components/Forum/ForumPost';
 import AddForumPost from '../../components/Forum/AddForumPost';
 import ForumService from '../../services/ForumService';
@@ -41,7 +41,7 @@ const ForumThread = (props) => {
                 <section className='section'>
                     <div className='column'>
                         <h1 className='title'>{thread.title}</h1>
-                        <p>{'Created by ' + thread.user.username + ' on ' + thread.createdAt}</p>
+                        <p>Created by <Link to={'/user/' + thread.user._id}>{thread.user.username}</Link>  on thread.createdAt</p>
                     </div>
                     <div className='container'>
                         {

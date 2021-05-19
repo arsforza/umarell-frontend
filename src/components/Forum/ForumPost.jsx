@@ -6,13 +6,13 @@ const ForumPost = ({ post }) => {
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="user-avatar" />
+                        <img src={post.user.avatar} alt="user-avatar" />
                     </figure>
                 </div>
                 <div class="media-content">
                     <div class="content">
                         <p>
-                            <strong>{post.user.username}</strong> <small>{post.createdAt}</small>
+                            <small>posted by</small> <strong>{post.user.username}</strong> <small>on {post.createdAt}</small>
                             <br />
                             {post.content}
                         </p>

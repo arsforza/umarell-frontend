@@ -12,7 +12,7 @@ import Signup from './pages/Auth/Signup';
 import Login from './pages/Auth/Login';
 import Forum from './pages/Forum/Forum';
 import ForumThread from './pages/Forum/ForumThread';
-
+import UserProfile from './pages/Forum/UserProfile';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -110,6 +110,16 @@ function App() {
               {...props}
               loggedInUser={loggedInUser}
             />
+          }
+        />
+
+        <Route path="/user/:id"
+          render=
+          {
+            (props) => 
+            !loggedInUser
+            ? <Redirect to='/' />
+            : <UserProfile {...props} loggedInUser={loggedInUser} />
           }
         />
 

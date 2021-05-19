@@ -39,6 +39,11 @@ class ForumService {
         .catch((err) => console.error(err));
     })
     .catch((err) => console.error(err));
+
+    getUser = (id) => this.service
+    .get(`/user/${id}`)
+    .then((response) => response.data)
+    .catch((err) => console.error(err));
 }
 
 export default ForumService;

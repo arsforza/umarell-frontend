@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-// import 'mapbox-gl/dist/mapbox-gl.css';
-// import mapboxgl from 'mapbox-gl';
 import './Map.css';
-
-// eslint-disable-next-line import/no-webpack-loader-syntax
-// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+const { REACT_APP_MAPBOX } = process.env
 
 const Map = ({ threadList, loggedInUser, addNewThread }) => {
     const [mapViewport, setMapViewport] = useState({
@@ -25,6 +21,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
 
 
     const mapClickHandler = (event) => {
+        console.log('map click');
         const [longitude, latitude] = event.lngLat;
         
         setMapClickCoord({
@@ -37,7 +34,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
     }
 
     const threadPopup = (thread) => {
-        setShowCreateNewThread(false);
+        // setShowCreateNewThread(false);
         setClickedThread(thread);
         setShowThreadPopup(true);
     }
@@ -59,7 +56,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
     return (
         <ReactMapGL
             {...mapViewport}
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
+            mapboxApiAccessToken={REACT_APP_MAPBOX}
             onViewportChange={(nextMapViewport) => setMapViewport(nextMapViewport)}
             onClick={(e) => mapClickHandler(e)}
         >
@@ -79,7 +76,6 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
         }
 
         {
-            loggedInUser &&
             showCreateNewThread &&
             <Popup
                 latitude={mapClickCoord.latitude}
@@ -88,15 +84,26 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
                 closeOnClick={false}
                 onClose={() => setShowCreateNewThread(false)}
             >
-                <form>
-                    <div className="field">
-                        <label className='label'>
-                            Thread title
-                        </label>
-                        <input className='input' type='text' name='title' onChange={(e) => threadTitleHandler(e)} />
+            {
+                loggedInUser
+                ? (
+                    <form>
+                        <div className="field">
+                            <label className='label'>
+                                Thread title
+                            </label>
+                            <input className='input' type='text' name='title' onChange={(e) => threadTitleHandler(e)} />
+                        </div>
+                        <button className='button is-primary' onClick={(e) => submitHandler(e)}>Create new thread</button>
+                    </form>
+                )
+                : (
+                    <div>
+                        <p>To create a new thread <Link to='/login'>Login</Link> or <Link to='/signup'>Signup</Link></p>
                     </div>
-                    <button className='button is-primary' onClick={(e) => submitHandler(e)}>Create new thread</button>
-                </form>
+                )
+            }
+                
             </Popup>
         }
             
