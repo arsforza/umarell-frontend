@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+// import 'mapbox-gl/dist/mapbox-gl.css';
+// import mapboxgl from 'mapbox-gl';
 import './Map.css';
 
+// eslint-disable-next-line import/no-webpack-loader-syntax
+// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const Map = ({ threadList, loggedInUser, addNewThread }) => {
     const [mapViewport, setMapViewport] = useState({
