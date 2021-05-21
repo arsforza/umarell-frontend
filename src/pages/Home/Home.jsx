@@ -4,14 +4,8 @@ import Hero from '../../components/Home/Hero';
 import Map from '../../components/Home/Map';
 
 const Home = ({ loggedInUser, threadList, addNewThread }) => {
-    // const [user, setUser] = useState(null);
-
-    // useEffect(() => {
-    //     setUser(loggedInUser);
-    // }, [loggedInUser])
-
     return (
-        <div>
+        <div className='body-container'>
             <Hero />
             <Map threadList={threadList} loggedInUser={loggedInUser} addNewThread={addNewThread}/>
             <Forum threadList={threadList} />

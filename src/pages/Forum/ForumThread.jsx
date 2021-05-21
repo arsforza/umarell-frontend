@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import ForumPost from '../../components/Forum/ForumPost';
 import AddForumPost from '../../components/Forum/AddForumPost';
 import ForumService from '../../services/ForumService';
@@ -15,7 +16,6 @@ const ForumThread = (props) => {
 
     const getSingleThread = () => {
         const service = new ForumService();
-        console.log('getSingleThread');
         const { id } = props.match.params;
         
         service.getThread(id)
@@ -30,7 +30,9 @@ const ForumThread = (props) => {
     const addPost = (partialPost) => {
         const service = new ForumService();
         service.createPost(thread._id, { ...partialPost, user: loggedInUser._id, thread: thread._id })
-        .then(() => getSingleThread())
+        .then(() => {
+            getSingleThread();
+        })
         .catch((err) => console.error(err));
     }
 
@@ -38,12 +40,13 @@ const ForumThread = (props) => {
         <div className='container'>
             {
                 thread._id &&
-                <section className='section'>
+                <section className='section my-5'>
                     <div className='column'>
                         <h1 className='title'>{thread.title}</h1>
-                        <p>Created by <Link to={'/user/' + thread.user._id}>{thread.user.username}</Link>  on thread.createdAt</p>
+                        <p><small>Created by</small> <Link to={'/user/' + thread.user._id}><strong>{thread.user.username}</strong></Link> <small>on {new Date(thread.createdAt).toUTCString()}</small></p>
                     </div>
-                    <div className='container'>
+                    <HashLink smooth to='#new-post'><span className='button is-primary m-3'>Add new Reply</span></HashLink>
+                    <div className='container my-5'>
                         {
                             thread.posts.map(post => <ForumPost key={post._id} post={post} />)
                         }
@@ -52,7 +55,7 @@ const ForumThread = (props) => {
             }
             {
                 loggedInUser &&
-                <section className='section'>
+                <section id='new-post' className='section'>
                     <AddForumPost liftPartialPost={addPost} />
                 </section>
             }

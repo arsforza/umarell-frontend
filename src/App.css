@@ -1,13 +1,25 @@
+:root {
+  --nav-height: 64px;
+}
+
 nav {
   height: var(--nav-height);
 }
 
-.home-section {
-  height: calc(100vh - var(--nav-height));
+.hero {
+  margin-top: var(--nav-height);
+}
+
+.fullpage-section {
+  height: 100vh;
+  padding-top: var(--nav-height);
 }
 
 .map-marker {
   cursor: pointer;
+  color:hsl(171, 100%, 41%);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black
 }
 
 .post-content {
@@ -16,7 +28,7 @@ nav {
   
   
 #hero {
-  background: url('umarell-hero-color.jpg') rgba(0, 0, 0, 0.8);
+  background: url('umarell-hero-color.jpg') rgba(0, 0, 0, 0.75);
   background-position: center;
   background-size: cover;
   background-blend-mode: multiply;
@@ -30,4 +42,8 @@ nav {
 
 .post-thumbnail {
   cursor: pointer;
+}
+
+#auth-content {
+  margin: auto;
 }

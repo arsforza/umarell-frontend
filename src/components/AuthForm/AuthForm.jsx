@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AuthForm = ({ authHandler }) => {
+const AuthForm = ({ authHandler, authType }) => {
     const initialState = {username: '', password: ''}
 
     const [credentials, setCredentials] = useState(initialState);
@@ -18,15 +18,17 @@ const AuthForm = ({ authHandler }) => {
 
     return (
         <form onChange={changeHandler}>
-            <label>
-                Username
-                <input type="text" name="username" />
-            </label>
-            <label>
-                Password
-                <input type="password" name="password" />
-            </label>
-            <button onClick={submitHandler}>Login</button>
+            <div className='field'>
+                <label className='label has-text-white'>Username</label>
+                <input className='input' type="text" name="username" />
+            </div>
+            <div className='field'>
+                <label className='label has-text-white'>Password</label>
+                <input className='input' type="password" name="password" />
+            </div>
+            <div class="control">
+                <button class="button is-link" onClick={submitHandler}>{authType}</button>
+            </div>
         </form>
     )
 }

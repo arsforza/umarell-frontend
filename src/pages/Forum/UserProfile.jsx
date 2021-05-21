@@ -27,24 +27,27 @@ const UserProfile = ({ match, loggedInUser }) => {
 
     return(
         profileUser &&
-        <article className="media">
-            <div className='media-left'>
-                <figure>
-                    <p className="image is-128x128">
-                        <img src={profileUser.avatar} alt='avatar'/>
-                    </p>
-                </figure>
-                {
-                    loggedInUser &&
-                    profileUser._id === loggedInUser._id &&
-                    <FileInput liftImages={setNewAvatar} />
-                }
+        <div className='fullpage-section'>
+            <div className='container'>
+                <article className="media py-5">
+                    <div className='media-left'>
+                        <figure>
+                            <p className="image is-128x128">
+                                <img src={profileUser.avatar} alt='avatar'/>
+                            </p>
+                        </figure>
+                        {
+                            loggedInUser &&
+                            profileUser._id === loggedInUser._id &&
+                            <FileInput liftImages={setNewAvatar} />
+                        }
+                    </div>
+                    <div className='media-right'>
+                        <h3 className='subtitle'><strong>{profileUser.username}</strong></h3>
+                    </div>
+                </article>
             </div>
-            <div className='media-right'>
-                <p>{profileUser.username}</p>
-            </div>
-            
-        </article>
+        </div>
     );
 };
 

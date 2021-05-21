@@ -17,7 +17,7 @@ const ForumPost = ({ post }) => {
                             <br />
                             {post.content}
                         </p>
-                        <div className='gallery row'>
+                        <div className='gallery is-flex is-flex-direction-row'>
                             {
                                 post.images.map(imgUrl => {
                                     return(

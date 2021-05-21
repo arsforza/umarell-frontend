@@ -105,7 +105,7 @@ function App() {
           {
             (props) => 
             !loggedInUser
-            ? <Redirect to='/' />
+            ? <Redirect to='/login' />
             : <UserProfile {...props} loggedInUser={loggedInUser} />
           }
         />

@@ -14,9 +14,13 @@ const Signup = ({ setAppUser }) => {
     };
 
     return(
-        <div>
-            <h1>Signup</h1>
-            <AuthForm authHandler={authHandler}/>
+        <div id='hero' className='hero is-fullheight-with-navbar '>
+            <div className='hero-body'>
+                <div id='auth-content' className='is-mobile'>
+                    <h1 className='has-text-white title'>Signup</h1>
+                    <AuthForm authHandler={authHandler} authType='Signup'/>
+                </div>
+            </div>
         </div>
     );
 };

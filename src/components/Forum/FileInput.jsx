@@ -35,12 +35,12 @@ const FileInput = ({ multiple, liftImages, uploadComplete }) => {
         <div>
             {
                 multiple
-                ? <input type="file" onChange={handleFileSelection} multiple/>
-                : <input type="file" onChange={handleFileSelection}/>
+                ? <input className='my-5' type="file" onChange={handleFileSelection} multiple/>
+                : <input className='my-5' type="file" onChange={handleFileSelection}/>
             }
             {
                 selectedFiles.length > 0 &&
-                <button onClick={handleFileUpload}>Upload</button>
+                <button className='button is-primary my-2' onClick={handleFileUpload}>Upload</button>
             }
         </div>
     )

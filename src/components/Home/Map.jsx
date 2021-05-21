@@ -19,9 +19,7 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
     const [showThreadPopup, setShowThreadPopup] = useState(false);
 
 
-    const mapClickHandler = (event) => {
-        console.log('mapclick');
-        
+    const mapClickHandler = (event) => {        
         const [longitude, latitude] = event.lngLat;
         
         setMapClickCoord({
@@ -55,7 +53,12 @@ const Map = ({ threadList, loggedInUser, addNewThread }) => {
     }
 
     return (
-        <div id='map' className='home-section'>
+        <div id='map' className='fullpage-section'>
+            <div className='container'>
+                <p>On this map you can see which building sites our umarells are already discussing.</p>
+                <p>If you don't see a building site you're interested in, you can create a new discussion by clicking on the map in the spot where the site is.</p>
+            </div>
+
             <div id='map-inner-container'>
                     <ReactMapGL
                         {...mapViewport}
