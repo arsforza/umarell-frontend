@@ -11,7 +11,7 @@ const Forum = ({ threadList }) => {
                         threadList.map((thread) => {
                             return (
                                 <Link to={'/thread/' + thread._id}>
-                                    <div key={thread._id} className="box my-2">
+                                    <div key={thread._id} className="box m-5">
                                         <article className="media">
                                             <div className="media-content">
                                                 <div className="content">
