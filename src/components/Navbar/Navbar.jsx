@@ -20,46 +20,39 @@ const Navbar = ({ loggedInUser, setAppUser }) => {
     };
 
     return(
-        <nav className='navbar is-light is-fixed-top is-spaced'>          
-            <div className="navbar-brand">
+        <nav className='navbar is-light is-fixed-top is-spaced level is-fluid is-mobile'>
+            <div className="level-left">
                 <Link to='/'>
                     <span className='button is-light'>
                         Home
                     </span>
                 </Link>
-                <div className="navbar-burger burger" data-target='app-menu'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </div>
-            <div className="navbar-menu" id='app-menu'>
-                <div className="navbar-end">
-                    {
-                        !user
-                        ? <div>
-                            <Link to='/signup'>
-                                <span className='button is-primary mx-2'>
-                                    Signup
-                                </span>
-                            </Link>
-                            <Link to='/login'>
-                                <span className='button is-primary is-outlined mx-2'>
-                                    Login
-                                </span>
-                            </Link>
-                        </div>
-                        : <div>
-                            <Link to={`/user/${user._id}`}>
-                                <button className='button is-primary is-outlined mx-2'>Your profile</button>
-                            </Link>
-                            <Link to='/'>
-                                <button className='button is-primary mx-2' onClick={() => logoutUser()}>Logout</button>
-                            </Link>
-                        </div>
+            <div className="level-right">
+                {
+                    !user
+                    ? <div>
+                        <Link to='/signup'>
+                            <span className='button is-primary mx-2'>
+                                Signup
+                            </span>
+                        </Link>
+                        <Link to='/login'>
+                            <span className='button is-primary is-outlined mx-2'>
+                                Login
+                            </span>
+                        </Link>
+                    </div>
+                    : <div>
+                        <Link to={`/user/${user._id}`}>
+                            <button className='button is-primary is-outlined mx-2'>Your profile</button>
+                        </Link>
+                        <Link to='/'>
+                            <button className='button is-primary mx-2' onClick={() => logoutUser()}>Logout</button>
+                        </Link>
+                    </div>
 
-                    }
-                </div>
+                }
             </div>
         </nav>
     );
