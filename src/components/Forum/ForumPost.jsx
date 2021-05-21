@@ -1,21 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ForumPost = ({ post }) => {
     return(
-        <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-64x64">
+        <div className="box">
+            <article className="media">
+                <div className="media-left">
+                    <figure className="image is-64x64">
                         <img src={post.user.avatar} alt="user-avatar" />
                     </figure>
                 </div>
-                <div class="media-content">
-                    <div class="content">
+                <div className="media-content">
+                    <div className="content post-content">
                         <p>
-                            <small>posted by</small> <strong>{post.user.username}</strong> <small>on {post.createdAt}</small>
+                            <small>posted by</small> <strong><Link to={'/user/' + post.user._id}>{post.user.username}</Link></strong> <small>on {post.createdAt}</small>
                             <br />
                             {post.content}
                         </p>
+                        <div className='gallery row'>
+                            {
+                                post.images.map(imgUrl => {
+                                    return(
+                                        <a href={imgUrl} target='_blank' rel="noreferrer">
+                                            <figure key={imgUrl} className="image is-128x128 post-thumbnail">
+                                                <img src={imgUrl} alt='post-upload' />
+                                            </figure>
+                                        </a>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
             </article>

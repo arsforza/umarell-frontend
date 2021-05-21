@@ -10,7 +10,6 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Signup from './pages/Auth/Signup';
 import Login from './pages/Auth/Login';
-import Forum from './pages/Forum/Forum';
 import ForumThread from './pages/Forum/ForumThread';
 import UserProfile from './pages/Forum/UserProfile';
 
@@ -24,7 +23,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log('use effect');
     const authService = new AuthService();
     if(loggedInUser === null) {
       authService.isLoggedIn()
@@ -59,7 +57,7 @@ function App() {
     .then((createdThread) => {
       setTimeout(() => {
         history.push(`/thread/${createdThread._id}`)
-      }, 500);
+      }, 250);
     }) 
     .catch((err) => console.error(err));
   }
@@ -90,17 +88,6 @@ function App() {
             />
           }
         </Route>
-
-        <Route path='/forum'
-          render=
-          {
-            () =>
-            <Forum
-              loggedInUser={loggedInUser}
-              threadList={threadList}
-            />
-          }
-        />
 
         <Route path='/thread/:id'
           render=

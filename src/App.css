@@ -1,0 +1,33 @@
+nav {
+  height: var(--nav-height);
+}
+
+.home-section {
+  height: calc(100vh - var(--nav-height));
+}
+
+.map-marker {
+  cursor: pointer;
+}
+
+.post-content {
+  white-space: pre-wrap;
+}
+  
+  
+#hero {
+  background: url('umarell-hero-color.jpg') rgba(0, 0, 0, 0.8);
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+#map-inner-container {
+  margin: 40px auto;
+  width: 80%;
+  height: 80%;
+}
+
+.post-thumbnail {
+  cursor: pointer;
+}

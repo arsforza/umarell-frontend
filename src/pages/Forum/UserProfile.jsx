@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import FileInput from '../../components/Forum/FileInput';
 import ForumService from '../../services/ForumService';
 
 const UserProfile = ({ match, loggedInUser }) => {
     const [profileUser, setProfileUser] = useState(null);
-
-    console.log('profile id ', match.params.id);
 
     const fetchUser = (id) => {
         const forumService = new ForumService();
@@ -16,18 +15,13 @@ const UserProfile = ({ match, loggedInUser }) => {
 
     useEffect(() => fetchUser(match.params.id), [match.params.id])
 
-    const handleFileUpload = (event) => {
+    const setNewAvatar = (files) => {
         const forumService = new ForumService();
 
-        const uploadData = new FormData();
-        uploadData.append('imagefile', event.target.files[0]);
-
-        forumService.uploadImg(uploadData)
-        .then((response => {
-            forumService.changeAvatar(profileUser._id, response.secure_url)
-            .then(response => response.data)
-            .catch((err) => console.error(err));
-        }))
+        forumService.changeAvatar(profileUser._id, files[0].path)
+        .then(() => {
+            fetchUser(match.params.id);  
+        })
         .catch((err) => console.error(err));
     }
 
@@ -36,16 +30,14 @@ const UserProfile = ({ match, loggedInUser }) => {
         <article className="media">
             <div className='media-left'>
                 <figure>
-                    <p className="image is-160x160">
+                    <p className="image is-128x128">
                         <img src={profileUser.avatar} alt='avatar'/>
                     </p>
                 </figure>
                 {
                     loggedInUser &&
                     profileUser._id === loggedInUser._id &&
-                    <form>
-                        <input type="file" onChange={handleFileUpload}/>
-                    </form>
+                    <FileInput liftImages={setNewAvatar} />
                 }
             </div>
             <div className='media-right'>

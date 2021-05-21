@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Map from '../../components/Map/Map';
+import React from 'react';
+import Forum from '../../components/Home/Forum';
+import Hero from '../../components/Home/Hero';
+import Map from '../../components/Home/Map';
 
 const Home = ({ loggedInUser, threadList, addNewThread }) => {
     // const [user, setUser] = useState(null);
@@ -9,7 +11,11 @@ const Home = ({ loggedInUser, threadList, addNewThread }) => {
     // }, [loggedInUser])
 
     return (
-        <Map threadList={threadList} loggedInUser={loggedInUser} addNewThread={addNewThread}/>
+        <div>
+            <Hero />
+            <Map threadList={threadList} loggedInUser={loggedInUser} addNewThread={addNewThread}/>
+            <Forum threadList={threadList} />
+        </div>
     )
 }
 

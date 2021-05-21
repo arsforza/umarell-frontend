@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ForumPost from '../../components/Forum/ForumPost';
 import AddForumPost from '../../components/Forum/AddForumPost';
 import ForumService from '../../services/ForumService';
@@ -13,24 +13,24 @@ const ForumThread = (props) => {
         user: null,
     });
 
-    const history = useHistory();
-
     const getSingleThread = () => {
+        const service = new ForumService();
+        console.log('getSingleThread');
         const { id } = props.match.params;
         
-        const service = new ForumService();
-
         service.getThread(id)
-        .then((response) => setThread(response))
+        .then((response) => {
+            setThread(response)
+        })
         .catch((err) => console.error(err))
     }
 
-    useEffect(getSingleThread, [props]);
+    useEffect(getSingleThread, [props.match.params]);
     
-    const addPost = (post) => {
+    const addPost = (partialPost) => {
         const service = new ForumService();
-        service.createPost(thread._id, {...post, user: loggedInUser._id, thread: thread._id})
-        .then((response) => history.push(`/thread/${thread._id}`))
+        service.createPost(thread._id, { ...partialPost, user: loggedInUser._id, thread: thread._id })
+        .then(() => getSingleThread())
         .catch((err) => console.error(err));
     }
 
@@ -53,7 +53,7 @@ const ForumThread = (props) => {
             {
                 loggedInUser &&
                 <section className='section'>
-                    <AddForumPost addPost={addPost}/>
+                    <AddForumPost liftPartialPost={addPost} />
                 </section>
             }
         </div>
